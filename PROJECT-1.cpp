@@ -1,5 +1,6 @@
 // PROJECT-1.cpp: A program using the TL-Engine
 #include <iostream>
+#include <vector>
 #include "TL-Engine11.h" // TL-Engine11 include file and namespace
 using namespace tle;
 
@@ -15,13 +16,20 @@ int main()
 	/**** Set up your scene here ****/
 	Mesh* cubeMesh;
 	Model* cube;
+	Mesh* torusMesh;
+	Model* torus;
+	Mesh* gridMesh;
+	Model* grid;
 
 	cubeMesh = myEngine->LoadMesh("cube.x ");
 	cube = cubeMesh->CreateModel( );
+	torusMesh = myEngine->LoadMesh("torus.x");
+	torus = torusMesh->CreateModel(20, 0, 10 );
+	gridMesh = myEngine->LoadMesh("grid.x");
+	grid = gridMesh->CreateModel(); 
 
 	Camera* myCamera;
 	myCamera = myEngine->CreateCamera(kFPS);
-
 
 	for (size_t i = 0; i < 100; i++)
 	{
@@ -33,6 +41,10 @@ int main()
 	{
 		// Draw the scene
 		myEngine->DrawScene();
+
+		cube->RotateY(0.05f);
+		cube->MoveY(0.01f);
+		
 
 		/**** Update your scene each frame here ****/
 
