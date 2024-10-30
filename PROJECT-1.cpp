@@ -24,12 +24,12 @@ int main()
 	std::vector<Model*> cubes;
 
 	const int gridSize = 10;
-	const float spacing = 2.0f;
+	const float spacing = 20.0f;
 
 	cubeMesh = myEngine->LoadMesh("cube.x ");
-	cube = cubeMesh->CreateModel();
-	torusMesh = myEngine->LoadMesh("torus.x");
-	torus = torusMesh->CreateModel(20, 0, 10);
+	cube = cubeMesh->CreateModel(25.0, 0.0, 0.0);
+	/*torusMesh = myEngine->LoadMesh("torus.x");*/
+	//torus = torusMesh->CreateModel(20, 0, 10);
 	gridMesh = myEngine->LoadMesh("grid.x");
 	grid = gridMesh->CreateModel();
 
@@ -44,7 +44,7 @@ int main()
 			cubes.push_back(cube);
 		}
 	};
-
+	
 	// The main game loop, repeat until engine is stopped
 	while (myEngine->IsRunning())
 	{
@@ -54,7 +54,9 @@ int main()
 		for (auto& cube : cubes)
 		{
 			cube->RotateY(0.05f);
+			cube->MoveY(0.01f);
 		}
+		
 
 		/**** Update your scene each frame here ****/
 
