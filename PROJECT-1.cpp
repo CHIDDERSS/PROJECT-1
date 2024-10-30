@@ -7,11 +7,11 @@ using namespace tle;
 int main()
 {
 	// Create a 3D engine (using TL11 engine here) and open a window for it
-	TLEngine* myEngine = New3DEngine( TL11 );
+	TLEngine* myEngine = New3DEngine(TL11);
 	myEngine->StartWindowed();
 
 	// Add default folder for meshes and other media
-	myEngine->AddMediaFolder( "C:\\Users\\Public\\Documents\\TL-Engine11\\Media" );
+	myEngine->AddMediaFolder("C:\\Users\\Public\\Documents\\TL-Engine11\\Media");
 
 	/**** Set up your scene here ****/
 	Mesh* cubeMesh;
@@ -21,19 +21,28 @@ int main()
 	Mesh* gridMesh;
 	Model* grid;
 
+	std::vector<Model*> cubes;
+
+	const int gridSize = 10;
+	const float spacing = 2.0f;
+
 	cubeMesh = myEngine->LoadMesh("cube.x ");
-	cube = cubeMesh->CreateModel( );
+	cube = cubeMesh->CreateModel();
 	torusMesh = myEngine->LoadMesh("torus.x");
-	torus = torusMesh->CreateModel(20, 0, 10 );
+	torus = torusMesh->CreateModel(20, 0, 10);
 	gridMesh = myEngine->LoadMesh("grid.x");
-	grid = gridMesh->CreateModel(); 
+	grid = gridMesh->CreateModel();
 
 	Camera* myCamera;
 	myCamera = myEngine->CreateCamera(kFPS);
 
-	for (size_t i = 0; i < 100; i++)
+	for (size_t i = 0; i < gridSize; ++i)
 	{
-		std::cout << cube << "\n";
+		for (int j = 0; j < gridSize; ++j)
+		{
+			Model* cube = cubeMesh->CreateModel(i * spacing, 0.0f, j * spacing);
+			cubes.push_back(cube);
+		}
 	};
 
 	// The main game loop, repeat until engine is stopped
@@ -42,15 +51,16 @@ int main()
 		// Draw the scene
 		myEngine->DrawScene();
 
-		cube->RotateY(0.05f);
-		cube->MoveY(0.01f);
-		
+		for (auto& cube : cubes)
+		{
+			cube->RotateY(0.05f);
+		}
 
 		/**** Update your scene each frame here ****/
 
 
 		// Stop if the Escape key is pressed
-		if (myEngine->KeyHit( Key_Escape ))
+		if (myEngine->KeyHit(Key_Escape))
 		{
 			myEngine->Stop();
 		}
