@@ -20,18 +20,22 @@ int main()
 	Model* torus;
 	Mesh* gridMesh;
 	Model* grid;
+	Mesh* sphereMesh;
+	Model* sphere;
 
-	std::vector<Model*> cubes;
+	std::vector<Model*> spheres;
 
-	const int gridSize = 10;
-	const float spacing = 2.0f;
+	const int gridSize = 35;
+	const float spacing = 20.0f;
 
 	cubeMesh = myEngine->LoadMesh("cube.x ");
 	cube = cubeMesh->CreateModel();
 	torusMesh = myEngine->LoadMesh("torus.x");
-	torus = torusMesh->CreateModel(20, 0, 10);
+	torus = torusMesh->CreateModel(75, 0, 10);
 	gridMesh = myEngine->LoadMesh("grid.x");
 	grid = gridMesh->CreateModel();
+	sphereMesh = myEngine->LoadMesh("sphere.x");
+	sphere = sphereMesh->CreateModel(50, 0, 10);
 
 	Camera* myCamera;
 	myCamera = myEngine->CreateCamera(kFPS);
@@ -40,10 +44,10 @@ int main()
 	{
 		for (int j = 0; j < gridSize; ++j)
 		{
-			Model* cube = cubeMesh->CreateModel(i * spacing, 0.0f, j * spacing);
-			cubes.push_back(cube);
+			Model* sphere = sphereMesh->CreateModel(i * spacing, j * spacing);
+			spheres.push_back(sphere);
 		}
-	};
+	}; 
 
 	// The main game loop, repeat until engine is stopped
 	while (myEngine->IsRunning())
@@ -51,9 +55,10 @@ int main()
 		// Draw the scene
 		myEngine->DrawScene();
 
-		for (auto& cube : cubes)
+		for (auto& sphere : spheres)
 		{
-			cube->RotateY(0.05f);
+			sphere->RotateY(0.05f);
+		/*	torus->MoveY(0.01f);*/
 		}
 
 		/**** Update your scene each frame here ****/
