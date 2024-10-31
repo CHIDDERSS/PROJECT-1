@@ -1,3 +1,6 @@
+//	MERGING UNI WORK WITH THIS WORK
+// https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories
+
 // PROJECT-1.cpp: A program using the TL-Engine
 #include <iostream>
 #include <vector>
@@ -20,8 +23,8 @@ int main()
 	Model* torus;
 	Mesh* gridMesh;
 	Model* grid;
-	Mesh* sphereMesh;
-	Model* sphere;
+		Mesh* sphereMesh;
+		Model* sphere;
 
 	std::vector<Model*> spheres;
 
@@ -40,9 +43,9 @@ int main()
 	Camera* myCamera;
 	myCamera = myEngine->CreateCamera(kFPS);
 
-	for (size_t i = 0; i < gridSize; ++i)
+	for (size_t i = 0; i < gridSize; i++)
 	{
-		for (int j = 0; j < gridSize; ++j)
+		for (int j = 0; j < gridSize; j++)
 		{
 			Model* sphere = sphereMesh->CreateModel(i * spacing, j * spacing);
 			spheres.push_back(sphere);
@@ -58,7 +61,7 @@ int main()
 		for (auto& sphere : spheres)
 		{
 			sphere->RotateY(0.05f);
-		/*	torus->MoveY(0.01f);*/
+			sphere->MoveY(0.01f);
 		}
 
 		/**** Update your scene each frame here ****/
