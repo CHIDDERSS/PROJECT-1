@@ -6,6 +6,7 @@
 #include <vector>
 #include "TL-Engine11.h" // TL-Engine11 include file and namespace
 using namespace tle;
+using namespace std;
 
 int main()
 {
@@ -23,22 +24,22 @@ int main()
 	Model* torus;
 	Mesh* gridMesh;
 	Model* grid;
-		Mesh* sphereMesh;
-		Model* sphere;
+	Mesh* sphereMesh;
+	Model* sphere;
 
-	std::vector<Model*> spheres;
+	vector<Model*> cubes;
 
-	const int gridSize = 35;
+	const int gridSize = 10;
 	const float spacing = 20.0f;
 
 	cubeMesh = myEngine->LoadMesh("cube.x ");
-	cube = cubeMesh->CreateModel();
-	torusMesh = myEngine->LoadMesh("torus.x");
-	torus = torusMesh->CreateModel(75, 0, 10);
+	cube;
+	/*torusMesh = myEngine->LoadMesh("torus.x");*/
+	/*torus = torusMesh->CreateModel(75, 0, 10);*/
 	gridMesh = myEngine->LoadMesh("grid.x");
 	grid = gridMesh->CreateModel();
-	sphereMesh = myEngine->LoadMesh("sphere.x");
-	sphere = sphereMesh->CreateModel(50, 0, 10);
+	//sphereMesh = myEngine->LoadMesh("sphere.x");
+	//sphere = sphereMesh->CreateModel(50, 0, 10);
 
 	Camera* myCamera;
 	myCamera = myEngine->CreateCamera(kFPS);
@@ -47,8 +48,8 @@ int main()
 	{
 		for (int j = 0; j < gridSize; j++)
 		{
-			Model* sphere = sphereMesh->CreateModel(i * spacing, j * spacing);
-			spheres.push_back(sphere);
+			Model* cube = cubeMesh->CreateModel(i * spacing, 0.00f, j * spacing);
+			cubes.push_back(cube);
 		}
 	}; 
 
@@ -58,10 +59,10 @@ int main()
 		// Draw the scene
 		myEngine->DrawScene();
 
-		for (auto& sphere : spheres)
+		for (auto& cube : cubes)
 		{
-			sphere->RotateY(0.05f);
-			sphere->MoveY(0.01f);
+			cube->RotateY(0.05f);
+			cube->MoveY(0.01f);
 		}
 
 		/**** Update your scene each frame here ****/
