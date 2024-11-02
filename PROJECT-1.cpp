@@ -23,8 +23,8 @@ int main()
 	Model* torus;
 	Mesh* gridMesh;
 	Model* grid;
-		Mesh* sphereMesh;
-		Model* sphere;
+	Mesh* sphereMesh;
+	Model* sphere;
 
 	std::vector<Model*> spheres;
 
