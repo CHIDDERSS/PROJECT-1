@@ -1,6 +1,7 @@
 //	MERGING UNI WORK WITH THIS WORK
 // https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories
 
+
 // PROJECT-1.cpp: A program using the TL-Engine
 #include <iostream>
 #include <vector>
@@ -29,11 +30,11 @@ int main()
 
 	vector<Model*> cubes;
 
-	const int gridSize = 10;
-	const float spacing = 20.0f;
+	int gridSize = 10;		//35 = 1,225 of whatever model in a grid
+	float spacing = 20.0f;
 
 	cubeMesh = myEngine->LoadMesh("cube.x ");
-	cube;
+	cube;														 // removed CreateModel as it was creating one seperate from the migrating cubes
 	/*torusMesh = myEngine->LoadMesh("torus.x");*/
 	/*torus = torusMesh->CreateModel(75, 0, 10);*/
 	gridMesh = myEngine->LoadMesh("grid.x");
@@ -44,14 +45,19 @@ int main()
 	Camera* myCamera;
 	myCamera = myEngine->CreateCamera(kFPS);
 
+	// if statemnt for when the cubes get to certain height then move a different direction
+
 	for (size_t i = 0; i < gridSize; i++)
 	{
 		for (int j = 0; j < gridSize; j++)
 		{
 			Model* cube = cubeMesh->CreateModel(i * spacing, 0.00f, j * spacing);
 			cubes.push_back(cube);
+
 		}
 	}; 
+
+	// when cubes reach height increase spacing so they disperse 
 
 	// The main game loop, repeat until engine is stopped
 	while (myEngine->IsRunning())
@@ -61,10 +67,16 @@ int main()
 
 		for (auto& cube : cubes)
 		{
-			cube->RotateY(0.05f);
+			cube->RotateY(0.01f);
 			cube->MoveY(0.01f);
+			if (cube->GetY() > 0.25f)
+			{
+				cube->MoveY(-0.01f);
+			}
+	
 		}
 
+		
 		/**** Update your scene each frame here ****/
 
 
