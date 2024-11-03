@@ -71,7 +71,7 @@ int main()
 			cube->MoveY(0.01f);
 			if (cube->GetY() > 0.25f)
 			{
-				cube->MoveY(-0.01f);
+				
 			}
 	
 		}
