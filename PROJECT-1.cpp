@@ -28,15 +28,15 @@ int main()
 	Mesh* sphereMesh;
 	Model* sphere;
 
-	vector<Model*> cubes;
+	vector<Model*> toruss;
 
 	int gridSize = 10;		//35 = 1,225 of whatever model in a grid
 	float spacing = 20.0f;
 
 	cubeMesh = myEngine->LoadMesh("cube.x ");
 	cube;														 // removed CreateModel as it was creating one seperate from the migrating cubes
-	/*torusMesh = myEngine->LoadMesh("torus.x");*/
-	/*torus = torusMesh->CreateModel(75, 0, 10);*/
+	torusMesh = myEngine->LoadMesh("torus.x");
+	torus = torusMesh->CreateModel(75, 0, 10);
 	gridMesh = myEngine->LoadMesh("grid.x");
 	grid = gridMesh->CreateModel();
 	//sphereMesh = myEngine->LoadMesh("sphere.x");
@@ -51,8 +51,8 @@ int main()
 	{
 		for (int j = 0; j < gridSize; j++)
 		{
-			Model* cube = cubeMesh->CreateModel(i * spacing, 0.00f, j * spacing);
-			cubes.push_back(cube);
+			Model* torus = torusMesh->CreateModel(i * spacing, 0.00f, j * spacing);
+			toruss.push_back(torus);
 
 		}
 	}; 
@@ -65,11 +65,11 @@ int main()
 		// Draw the scene
 		myEngine->DrawScene();
 
-		for (auto& cube : cubes)
+		for (auto& torus : toruss)
 		{
-			cube->RotateY(0.01f);
-			cube->MoveY(0.01f);
-			if (cube->GetY() > 0.25f)
+			torus->RotateY(0.01f);
+			torus->MoveY(0.01f);
+			if (torus->GetY() > 0.25f)
 			{
 				
 			}
